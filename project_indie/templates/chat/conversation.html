@@ -1,0 +1,48 @@
+{% extends 'chat/inbox.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversa com {{ contact_username }}</title>
+    <link rel="stylesheet" href="{% static 'css/letter/messages.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+
+</head>
+<body>
+    
+    
+    <main class="conversa"> 
+        <h1 class="nome_contato_conversa">Conversa com {{ contact_username }}</a></h1>
+
+
+        <a href="{% url 'letter_app:inbox' %}"><span class="material-symbols-outlined" id="close">
+            close
+        </span></a>
+
+        <section class="message-container">
+            {% for message in conversation %}
+                <article class="message {% if message.sender == request.user %}sent{% else %}received{% endif %}">
+                    <p>{{ message.content }}</p>
+                    <span class="timestamp">{{ message.timestamp }}</span>
+                </article>
+            {% endfor %}
+        </section>
+
+        <form method="post" id="env" action="{% url 'letter_app:send_message' contact_username=contact_username %}">
+            {% csrf_token %}
+            <input type="text" id="envmsg" name="content" placeholder="Digite sua mensagem" required>
+            <button type="submit" id="btnsend">
+                <span id="iconsend" class="material-symbols-outlined">
+                    send
+                    </span>
+            </button>
+        </form>
+    </main>
+
+</body>
+</html>
+{% endblock %}

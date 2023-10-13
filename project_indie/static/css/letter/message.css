@@ -1,0 +1,280 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&display=swap');
+
+:root {
+
+    --letrasClaras: #dfdfdf;
+    --letrasAzuis: rgb(0, 0, 19);
+
+    --fundoAzul: linear-gradient(to right, rgb(1, 0, 12), rgb(1, 0, 14), rgb(1, 0, 16)); 
+    --fundoBranco: linear-gradient(to right, rgb(245, 245, 245), rgb(235, 235, 235), rgb(225, 225, 225));
+    --fundoIndigo: linear-gradient(to right, #223f55, #213e54, #25445d);
+
+}
+
+/*GERAIS */
+
+* { 
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow: hidden;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    background-image: var(--fundoAzul);
+}
+
+
+/* NAVBAR */
+.fotoperfil{
+    height: 43px;
+    width: 43px;
+    border-radius: 50%;
+}
+
+.perfilf{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  object-fit: cover;
+} 
+
+
+a{
+    color: var(--letrasClaras);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+h1{
+    font-size: 24px;
+}
+
+ul{
+    list-style: none;
+}
+
+.lm{
+    position: relative;
+    top: 1.5vh;
+}
+
+
+.urlinbox{
+
+    position: relative;
+    top: -3.2vh;
+    left: 32vw;
+    height: 45px;
+    width: 45px;
+    
+
+
+}
+
+/* MAIN */
+
+main{
+    color: var(--letrasClaras);
+}
+
+
+/* CONTATOS ////////////////////////////////////////////////////////////////////////////////////////// */
+.div-contac {
+  height: 75vh;
+  width: 25vw;
+  padding: 15px;
+  margin: 25px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.5s ease, height 0.2s ease;
+}
+
+.contatosnome {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 20px ;
+  font-size: 24px;
+}
+
+.c {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding: 8%;
+  list-style: none;
+  text-decoration: none;
+  font-size: large;
+  border-radius: 6px;
+  color: var(--letrasClaras);
+}
+
+.c:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: 0.5s;
+}
+
+/* Estilos para a seção de amizade */
+.div-amizade, .section_lista_grupos, .section_criar_grupos {
+  position: absolute;
+  height: 75vh;
+  width: 25%;
+  padding: 15px;
+  margin: 25px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.5s ease, height 0.2s ease;
+}
+
+.buscausers {
+  margin-top: 15px;
+  margin-bottom: 50px;
+  height: 20%;
+  color: var(--letrasClaras);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 4px;
+  outline: none;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0 35px 0 5px;
+}
+
+.buscausers::placeholder {
+  color: var(--letrasClaras);
+}
+
+.btnadd {
+  width: 25%;
+  height: 25%;
+  
+  background: transparent;
+  backdrop-filter: blur(10px);
+
+  border: 2px solid var(--letrasClaras);
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 1em;
+  color: var(--letrasClaras);
+  font-weight: 500;
+}
+
+.btnadd:hover {
+  opacity: 0.7;
+}
+
+.listasoli {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.btnaceitar {
+  background: transparent;
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--letrasClaras);
+  border-radius: 7px;
+  width: 4.2vw;
+  margin-top: 7px;
+  text-align: center;
+}
+
+.btnaceitar:hover {
+  opacity: 0.7;
+}
+
+/* Estilos para a seção de ícones */
+#iconesg {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Alinha os ícones verticalmente no centro */
+  height: 79%;
+  width: 6vw;
+  position: absolute;
+  right: 63vw;
+  top: 13vh;
+}
+
+.cazul {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  align-items: center;
+  text-align: center;
+  box-shadow: 8px rgba(0, 0, 0, 0.37);
+  cursor: pointer;
+  margin: 10px 0; /* Espaçamento entre os ícones */
+}
+
+.cazul:hover {
+  opacity: 0.7;
+}
+
+#cazul1 {
+  position: relative;
+}
+
+#cazul2 {
+  position: relative;
+  top: 4vh;
+}
+
+#cazul3 {
+  position: relative;
+  top: 8vh;
+}
+
+#cazul4 {
+  position: relative;
+  top: 12vh;
+}
+
+#contatosicon,
+#groupincons,
+#addcontatosicon,
+#addgroupincons {
+  font-size: 45px;
+  text-align: center;
+}
+
+/* Estilos para a seção de conversa */
+.conversa {
+  display: block;
+  position: absolute;
+  bottom: 4.9vh;
+  left: 37.5vw;
+  height: 75.5vh;
+  width: 56.9vw;
+  padding: 15px;
+  margin: 25px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transform: scale(1);
+  transition: transform 0.5s ease, height 0.2s ease;
+}
+
+
+#circle_contacts{
+  margin-right: 9px;
+}

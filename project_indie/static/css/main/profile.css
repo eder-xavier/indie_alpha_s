@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+:root {
+
+    --letrasClaras: #dfdfdf;
+    --letrasAzuis: rgb(0, 0, 19);
+
+    --fundoAzul: linear-gradient(to right, rgb(1, 0, 12), rgb(1, 0, 14), rgb(1, 0, 16)); 
+    --fundoBranco: linear-gradient(to right, rgb(245, 245, 245), rgb(235, 235, 235), rgb(225, 225, 225));
+    --fundoIndigo: linear-gradient(to right, #223f55, #213e54, #25445d);
+
+}
+
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    background-image: var(--fundoAzul);
+    color: var(--letrasClaras);
+}
+
+
+  .profile_main{
+    display: flex;
+  }
+
+  .profile-container{
+    height: 100%;
+    width: 80%;
+    margin: 50px;
+    position: relative;
+    left: 1vw;
+  }
+
+  .left_lane{
+    flex: 20%;
+    width: 20%;
+  }
+
+  .fotoperfil{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+
+
+  #username{
+    margin-top: 10px;
+    font-weight: lighter;
+  }
+
+
+  #bio{
+    font-size: 14px;
+    width: 180px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #conjunto_editprofile{
+    margin-top: 25px;
+    width: 180px;
+    vertical-align: bottom;
+  }
+
+  #edit_profile_btn{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 15px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align: bottom;
+    padding-top: 3px;
+    height: 36px;
+    width: 180px;
+  }
+
+  #edit_profile_btn:hover, .toggle-follow-button:hover{
+    opacity: 0.7;
+  }
+
+  #ancora_btn_editprofile{
+    width: 180px;
+    vertical-align: bottom;
+  }
+
+  .infos_profile{
+    text-align: justify;
+    padding-top: 30px;
+  }
+
+
+.toggle-follow-button{
+    cursor: pointer;
+    margin-top: 12px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 15px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align: bottom;
+    padding-top: 3px;
+    height: 36px;
+    width: 180px;
+    color: var(--letrasClaras);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+
+}
+
+
+.publications {
+  display: flex; /* Para criar uma grade de publicações */
+  flex-wrap: wrap; /* Permitir que as publicações quebrem para a próxima linha */
+  gap: 16px; /* Espaço entre as publicações */
+  overflow-y: auto; /* Adicione uma barra de rolagem vertical se necessário */
+  overflow-x: hidden;
+  max-height: 600px; /* Altura máxima da grade de publicações (ajuste conforme necessário) */
+  padding: 16px; /* Espaçamento interno para as publicações */
+  position: relative;
+ 
+}
+
+.publications h3 {
+  font-size: 18px; /* Tamanho do título da publicação */
+}
+
+.publications li {
+  flex: 1; /* As publicações ocupam o espaço disponível */
+  max-width: 400px; /* Largura máxima das publicações (ajuste conforme necessário) */
+  /*background: #fff;  Fundo branco para as publicações */
+  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.1); /* Sombra suave nas publicações */
+  border-radius: 8px; /* Borda arredondada nas publicações */
+  padding: 16px; /* Espaçamento interno nas publicações */
+  border: 0.9px solid rgba(255, 255, 255, .5);
+  transition: transform 0.2s ease; /* Efeito de transição ao passar o mouse */
+}
+
+.publications li:hover {
+  transform: translateY(-4px); /* Efeito de levantamento ao passar o mouse */
+}
+
+.publications img {
+  max-width: 369px; /* Defina o tamanho máximo */
+  height: auto; /* Mantenha a proporção de aspecto original */
+}
+
+
+.publications video {
+  max-width: 369px; /* Defina o tamanho máximo */
+  height: auto; /* Mantenha a proporção de aspecto original */
+}
+
+ul{
+  list-style: none;
+}
+
+@media (max-width: 999px) {
+  .left_lane{
+    display: none;
+  }
+  .profile_main {
+    flex-direction: column; /* Empilhe a página de perfil e a grade de publicações em telas pequenas */
+  }
+
+
+}
+
+@media (min-width: 999px) {
+  .publications{
+    right: 26vw;
+    max-width: 539px;
+    max-height: 596px; 
+    width: 696px;
+  }
+
+  .publications img {
+    width: 469px;
+  }
+
+  .publications video {
+    width: 469px;
+  }
+}

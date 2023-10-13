@@ -1,0 +1,223 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indie</title>
+  <link rel="stylesheet" href="{% static 'css/main/estruturamain.css' %}">
+  <link rel="stylesheet" href="{% static 'css/letter/message.css' %}">
+  <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+
+
+      <ul class="nav-list">
+
+        <li>
+          <a id="l" name="notific" href="{% url 'indie_app:main' %}">
+            <span id="notific" class="material-symbols-outlined">
+              house
+            </span>Home
+          </a>
+        </li>
+
+        <li>
+          <a id="l" name="social" href="{% url 'letter_app:inbox' %}"> <span id="social"
+              class='material-symbols-outlined'>
+              public
+            </span>Social</a>
+        </li>
+
+        <li>
+          <a id="l" name="profile" href="{% url 'storage_app:userprofile' user_id=request.user.id %}">
+            <span id="profile" class='material-symbols-outlined'>
+              account_circle
+            </span>Profile
+          </a>
+        </li>
+
+        <li>
+          <a id="l" name="archives" href="{% url 'storage_app:library' %}"> <span id="archives"
+              class='material-symbols-outlined'>
+              archive
+            </span>Archives</a>
+        </li>
+
+        <li>
+          <a id="l" name="settings" href="#"> <span id="settings" class='material-symbols-outlined'>
+              settings
+            </span>Settings</a>
+        </li>
+
+        <li>
+          <a id="l" name="logout" href="{% url 'indie_app:logout' %}"> <span id="logout"
+              class='material-symbols-outlined'>
+              logout
+            </span>Log out</a>
+        </li>
+
+      </ul>
+
+      <h1 class="nomelogo"><a href="{% url 'indie_app:main' %}">Indie</a></h1>
+
+      <article>
+        <form action="#"><input type="search" class="pesquisamain" placeholder="Pesquisar"></form>
+        <span class="material-symbols-outlined" id="searchicon">
+          travel_explore
+        </span>
+      </article>
+
+      <span class="material-symbols-outlined" id="searchicon2">
+        travel_explore
+      </span>
+
+      <a href="{% url 'storage_app:add_publication' %}" title="Nova Publicação">
+        <article class="bottom_new_mobile">
+          <span id="icon_add_newpost" class="material-symbols-outlined">
+            add_circle
+          </span>
+        </article>
+      </a>
+
+      <a class="logo" href="{% url 'storage_app:userprofile' user_id=request.user.id %}">
+        {% if user_profile.profile_picture %}
+        <article class="circle"><img src="{{ user_profile.profile_picture.url }}" alt="Foto de Perfil" class="perfilf">
+        </article>
+        {% else %}
+        <article class="circle"><img src="{% static 'img/whyman.png' %}" alt="Foto de Perfilp" class="perfilf">
+        </article>
+        {% endif %}
+      </a>
+
+
+
+    </nav>
+  </header>
+
+  <main>
+    <section id="contac" class="div-contac">
+      <h1 class="contatosnome">Contatos</h1>
+      <ul> 
+        {% for contact in contacts %}
+        <a href="{% url 'letter_app:conversation' contact_username=contact.contact.username %}">
+          <li class="c"> {% if contact.contact.profile.profile_picture %}
+            <span class="circle" id="circle_contacts">
+              <img class="fotoperfil" src="{{ contact.contact.profile.profile_picture.url }}"
+                alt="{{ contact.contact.username }}'s Profile Picture">
+            </span>
+            {% else %}
+            <span class="circle" id="circle_contacts">
+              <img class="fotoperfil" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil">
+            </span>
+            {% endif %}
+            <span>
+              {{ contact.contact.username }}
+            </span>
+          </li>
+        </a>
+        {% empty %}
+        <li>Nenhum contato encontrado.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section id="iconesg">
+      <article class="cazul" id="cazul1">
+        <a href="{% url 'letter_app:inbox' %}" onclick="mostrarContato()">
+          <span id="contatosicon" class="material-symbols-outlined">
+            person
+          </span>
+        </a>
+      </article>
+
+
+
+      <article class="cazul" id="cazul2">
+        <a href="{% url 'letter_app:group_list' %}" onclick="mostrarGrupos()">
+          <span id="groupincons" class="material-symbols-outlined">
+            groups
+          </span>
+        </a>
+      </article>
+
+
+
+
+
+      <article class="cazul" id="cazul3">
+        <a href="{% url 'letter_app:add_contact' %}" onclick="mostrarOutros()">
+          <span id="addcontatosicon" class="material-symbols-outlined">
+            person_add
+          </span>
+        </a>
+      </article>
+
+
+
+
+      <article class="cazul" id="cazul4">
+        <a href="{% url 'letter_app:create_group' %}" onclick="mostrarCriarGrupos()">
+          <span id="addgroupincons" class="material-symbols-outlined">
+            group_add
+          </span>
+        </a>
+      </article>
+
+
+    </section>
+
+
+    <section id="amizade" class="div-amizade" style="display: none;">
+
+      <h1>Adicionar Contato</h1>
+      <form method="post" action="{% url 'letter_app:add_contact' %}">
+        {% csrf_token %}
+        <input type="text" name="username" class="buscausers" placeholder="Nome de usuário" required>
+        <button type="submit" class="btnadd">Adicionar</button>
+      </form>
+
+      <h2>Solicitações de Amizade</h1>
+        <ul>
+          {% for request in friend_requests %}
+          <li class="listasoli">{{ request.requested_by.username }} quer adicionar você como contato.
+            <article class="btnaceitar">
+              <a href="{% url 'letter_app:accept_friend_request' contact_id=request.id %}">Aceitar</a>
+            </article>
+          </li>
+          {% empty %}
+          <li>Nenhuma solicitação de amizade pendente.</li>
+          {% endfor %}
+        </ul>
+
+    </section>
+
+    
+
+    {% block content %}
+    {% endblock %}
+
+
+  </main>
+
+  <script src="{% static 'js/main/transforms.js' %}"></script>
+  <script src="{% static 'js/letter/trocas.js' %}"></script>
+</body>
+
+</html>

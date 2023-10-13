@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&display=swap');
+
+:root {
+
+    --letrasClaras: #dfdfdf;
+    --letrasAzuis: rgb(0, 0, 19);
+
+    --fundoAzul: linear-gradient(to right, rgb(1, 0, 12), rgb(1, 0, 14), rgb(1, 0, 16)); 
+    --fundoBranco: linear-gradient(to right, rgb(245, 245, 245), rgb(235, 235, 235), rgb(225, 225, 225));
+    --fundoIndigo: linear-gradient(to right, #223f55, #213e54, #25445d);
+
+}
+
+
+.fotoperfil{
+    height: 39px;
+    width: 39px;
+    border-radius: 50%;
+}
+.perfilf{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    object-fit: cover;
+} 
+
+/* CONTATOS ////////////////////////////////////////////////////////////////////////////////////////// */
+
+ul{
+    list-style: none;
+}
+
+.div-contac{
+    position: relative;
+    height: 75vh;
+    width: 25vw;
+    padding: 15px;
+    margin: 25px;
+    border-radius: 6px;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+
+    transition: transform .5s ease ,height .2s ease;
+    display: block;
+}
+
+.contatosnome{
+
+    text-align: center;
+    margin: 6px;
+
+}
+
+.c{
+    width: 80%;
+    padding: 8%;
+    list-style: none;
+    text-decoration: none;
+    font-size: large;
+    border-radius: 6px;
+    color: var(--letrasClaras);
+}
+
+.c:hover{
+    transition: .5;
+    opacity: 0.7;
+}
+
+/* AMIZADE ////////////////////////////////////////////////////////////////////////////////////////// */
+.div-amizade{
+    position: relative;
+    height: 75vh;
+    width: 25%;
+    padding: 15px;
+    margin: 25px;
+    border-radius: 6px;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+
+    transition: transform .5s ease ,height .2s ease;
+    display: none;
+}
+
+
+.buscausers{
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 50px;
+    height: 20%;
+    
+    color: rgb(0, 0, 32);
+  
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+  
+    outline: none;
+    font-size: 1em;
+  
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.buscausers::placeholder{
+    color: white;
+}
+
+
+.btnadd{
+
+    width: 25%;
+    height: 25%;
+    background-image: linear-gradient(to right, rgb(1, 0, 20), rgb(1, 0, 33), rgb(1, 0, 40));
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: white;
+    font-weight: 500;
+}
+
+.btnadd:hover{
+    opacity: 0.7;
+}
+
+.listasoli{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.btnaceitar{
+    background-image: linear-gradient(to right, rgb(1, 0, 20), rgb(1, 0, 33), rgb(1, 0, 40));
+    border-radius: 7px;
+    width: 4.2vw;
+    margin-top: 7px;
+    text-align: center;
+}
+
+.btnaceitar:hover{
+    opacity: 0.7;
+}
+
+/*  ///////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.conversa{
+    position: relative;
+    bottom: 9vh;
+    left: 36.5vw;
+
+    height: 75.5vh;
+    width: 60vw;
+    padding: 15px;
+    margin: 25px;
+    border-radius: 6px;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    transform: scale(1);
+    transition: transform .5s ease ,height .2s ease;
+}
+
+
+#iconesg{
+    display: contents;
+    text-align: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .cazul{
+    display: column;
+     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+      backdrop-filter: blur(10px);
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      align-items: center;
+      text-align: center;
+      box-shadow: 8px rgba(0, 0, 0, 0.37);
+      cursor: pointer;
+      margin: 0;
+  }
+  
+  .cazul:hover{
+      opacity: 0.7;
+  }
+  
+  
+  #contatosicon{
+      font-size: 45px;
+      text-align: center;
+  }
+  
+  #groupincons{
+      font-size: 45px;
+      text-align: center;
+  }
+  
+  #addcontatosicon{
+      font-size: 45px;
+      text-align: center;
+  }
+  
+  #addgroupincons{
+      font-size: 45px;
+      text-align: center;
+  }
+

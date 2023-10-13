@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+:root {
+
+    --letrasClaras: #dfdfdf;
+    --letrasAzuis: rgb(0, 0, 19);
+
+    --fundoAzul: linear-gradient(to right, rgb(1, 0, 12), rgb(1, 0, 14), rgb(1, 0, 16)); 
+    --fundoBranco: linear-gradient(to right, rgb(245, 245, 245), rgb(235, 235, 235), rgb(225, 225, 225));
+    --fundoIndigo: linear-gradient(to right, #223f55, #213e54, #25445d);
+
+  }
+
+/* Estilo geral para o feed */
+.feed-container {
+    font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    width: 100%;
+    max-width: 600px; /* Defina a largura máxima desejada */
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para cada publicação */
+.publication {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+/* Estilo para informações do usuário e conteúdo da publicação */
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info a {
+    text-decoration: none;
+    color: #e9e9e9;
+}
+
+.publication-content {
+    padding: 10px;
+}
+
+/* Estilo para imagens e vídeos */
+.publication-content img,
+.publication-content video {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Estilo para a legenda */
+.publication-content p {
+    margin-bottom: 10px;
+}
+
+/* Estilo para a hora da publicação */
+.publication-content p:last-child {
+    color: #777;
+    font-size: 14px;
+}
+
+
+
+/* COMENTARIOS NAS PUBLICATIONS */
+
+.comment-text {
+    /*  */
+    background-color: transparent;
+    color: #ccc;
+    border-radius: 5px;
+    font-size: 14px; 
+    height: 30px;
+    width: 300px;
+    margin: 3px;
+}
+
+.add-comment-button{
+    background: none;
+    border: none;
+}
+
+.add-comment-button:hover{
+    opacity: 0.7;
+}
+
+#seta_comentarios {
+    position: relative;
+    top: 0.9vh;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--letrasClaras);
+}
+
+
+
+.like-button{
+    background: none;
+    border: none;
+}
+
+
+.like-button .lamp {
+    font-size: 24px; /* Tamanho do ícone da lâmpada */
+    color: white;
+    cursor: pointer; /* Cursor ao passar o mouse */
+}
+
+/* Estilo da lâmpada quando o usuário já curtiu (acesa) */
+.like-button.liked .lamp {
+    color: yellow; /* Cor da lâmpada acesa */
+}
+/* Estilo da lâmpada quando o usuário deu "like" (acesa) */
+.like-button .lamp.liked {
+    color: yellow; /* Cor da lâmpada acesa */
+}
+
+
+.perfilf{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    object-fit: cover;
+} 
+
+
+
+
+/* SCROLL */
+  
+  ::-webkit-scrollbar {
+    display: none;
+    /*
+    width: 3px;
+    height: 3px;  A altura só é vista quando a rolagem é horizontal */
+  }
+  
+  ::-webkit-scrollbar-track {
+    display: none;
+    background: none;
+    padding: 2px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    display: none;
+    background: none;
+  }

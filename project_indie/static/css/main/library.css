@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+:root {
+
+    --letrasClaras: #dfdfdf;
+    --letrasAzuis: rgb(0, 0, 19);
+
+    --fundoAzul: linear-gradient(to right, rgb(1, 0, 12), rgb(1, 0, 14), rgb(1, 0, 16)); 
+    --fundoBranco: linear-gradient(to right, rgb(245, 245, 245), rgb(235, 235, 235), rgb(225, 225, 225));
+    --fundoIndigo: linear-gradient(to right, #223f55, #213e54, #25445d);
+
+}
+
+body{
+    font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    background-image: var(--fundoAzul);
+    color: var(--letrasClaras);
+}
+
+.main_library{
+    display: flex;
+}
+
+.library-container{
+    max-height: 90%;
+    overflow-y: auto;
+    margin: 30px;
+}
+
+.escritas{
+    padding: 10px;
+}
+
+#nomeprincipal_library{
+    font-size: xx-large;
+}
+
+@media screen and (min-width: 999px) {
+    
+    .library-container{
+        position: relative;
+        left: 10vw;
+
+    }
+
+    .publication{
+        width: 569px;
+    }
+
+}

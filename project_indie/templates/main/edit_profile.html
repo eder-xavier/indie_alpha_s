@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit_profile</title>
+    <link rel="stylesheet" href="{% static 'css/main/edit_profile.css' %}">
+</head>
+<body>
+
+    
+    <section class="main_edit_profile">
+      <section class="left_lane">
+        <ul class="nav-list2">
+  
+          <li class="li_nav">
+            <a id="l" name="notific" href="{% url 'indie_app:main' %}">
+              <span id="notific" class="material-symbols-outlined">
+                house
+                </span>
+                Home
+            </a>
+          </li>
+  
+          <li class="li_nav">
+            <a id="l" name="social"  href="{% url 'letter_app:inbox' %}"> <span id="social" class='material-symbols-outlined'>
+              public
+            </span>Social</a>
+          </li>
+  
+          <li class="li_nav">
+            <a id="l" name="profile" href="{% url 'storage_app:userprofile' user_id=request.user.id %}">
+              <span id="profile" class='material-symbols-outlined'>
+                account_circle
+              </span>Profile
+            </a>
+          </li>
+  
+          <li class="li_nav">
+            <a id="l" name="archives"  href="{% url 'storage_app:library' %}"> <span id="archives" class='material-symbols-outlined'>
+              archive
+            </span>Archives</a>
+          </li>
+  
+          <li class="li_nav">
+            <a id="l" name="settings"  href="#"> <span id="settings" class='material-symbols-outlined'>
+              settings
+            </span>Settings</a>
+          </li>
+  
+          <li class="li_nav">
+            <a id="l" name="logout"  href="{% url 'indie_app:logout' %}"> <span id="logout" class='material-symbols-outlined'>
+              logout
+            </span>Log out</a>
+          </li>
+  
+        </ul>
+      </section>
+      
+        <section class="edit-profile-container">
+
+        <h2 class="edit_profile_txt_principal">Editar Perfil</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.profile_picture.label }}
+            {{ form.profile_picture }}
+
+            <p>{{ form.bio }}</p>
+            <button type="submit" class="btn_save_changes">Salvar Alterações</button>
+        </form>
+
+        <p><a href="{% url 'storage_app:userprofile' profile.user.id %}">Voltar para o perfil</a></p>
+        </section>
+        
+    </section>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,8 @@
+Build a archives system.
+
+Things for consert:
+
+* file storege.
+* file sharing.
+* Dinamic following and follow
+

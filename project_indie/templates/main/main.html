@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indie</title>
+  <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css/main/estruturamain.css' %}">
+  <link rel="stylesheet" href="{% static 'css/main/feed.css'' %}">
+
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+
+  <main>
+
+    <!-- FEED PROVISORIO AQUI
+
+    <div class="container"></div>
+    <script src="../principal/feed.js"></script>
+    <link rel="stylesheet" href="../../estilos/principal/feed.css">
+    -->
+
+    <section class="left_lane">
+      <ul class="nav-list2">
+
+        <!-- 
+        <li class="botton-new"> 
+          <a id="l" name="notific" href="{% url 'storage_app:add_publication' %}" class="new-button">New</a>
+        </li>
+        -->
+
+        <li class="li_nav">
+          <a id="l" name="notific" href="{% url 'indie_app:main' %}">
+            <span id="notific" class="material-symbols-outlined">
+              house
+            </span>
+            Home
+          </a>
+        </li>
+        <!--
+        <li>
+          <a id="l" name="notific"  href="{% url 'storage_app:friend_requests' %}"> <span id="notific" class='material-symbols-outlined'>
+            notifications
+          </span> Notifications </a>
+        </li>
+        -->
+
+        <li class="li_nav">
+          <a id="l" name="social" href="{% url 'letter_app:inbox' %}"> <span id="social"
+              class='material-symbols-outlined'>
+              public
+            </span>Social</a>
+        </li>
+
+        <li class="li_nav">
+          <a id="l" name="profile" href="{% url 'storage_app:userprofile' user_id=request.user.id %}">
+            <span id="profile" class='material-symbols-outlined'>
+              account_circle
+            </span>Profile
+          </a>
+        </li>
+
+        <li class="li_nav">
+          <a id="l" name="archives" href="{% url 'storage_app:library' %}"> <span id="archives"
+              class='material-symbols-outlined'>
+              archive
+            </span>Archives</a>
+        </li>
+
+        <li class="li_nav">
+          <a id="l" name="settings" href="#"> <span id="settings" class='material-symbols-outlined'>
+              settings
+            </span>Settings</a>
+        </li>
+
+        <li class="li_nav">
+          <a id="l" name="logout" href="{% url 'indie_app:logout' %}"> <span id="logout"
+              class='material-symbols-outlined'>
+              logout
+            </span>Log out</a>
+        </li>
+
+      </ul>
+    </section>
+
+    <section class="mid_lane">
+
+      <section class="feed-container" id="feed-section">
+
+        <!-- Código para exibir o feed de publicações -->
+
+        {% for publication in feed_publications %}
+        {% if publication.is_public %}
+
+        <section class="publication">
+
+          <!-- Informações do user -->
+          <article class="user-info">
+
+            <a href="{% url 'storage_app:userprofile' user_id=publication.author.profile.user.id %}">
+              {% if publication.author.profile.profile_picture %}
+              <img class="perfilf_feed" src="{{ publication.author.profile.profile_picture.url }}"
+                alt="{{ publication.author.username }}'s Profile Picture">
+              {% else %}
+              <img class="perfilf_feed" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil">
+              {% endif %}
+            </a>
+
+            <article class="user-details">
+              <a href="{% url 'storage_app:userprofile' user_id=publication.author.profile.user.id %}">
+                {{ publication.author.username }}
+              </a>
+              <span>{{ publication.formatted_created_at }}</span>
+            </article>
+
+          </article>
+
+          <article class="publication-content">
+            <p>{{ publication.title }}</p>
+            <!-- Exibir imagem, vídeo ou anexo, texto, se estiverem presentes -->
+            {% if publication.image %}
+            <img src="{{ publication.image.url }}" alt="Imagem">
+            {% endif %}
+            {% if publication.video %}
+            <video controls width="100%" height="auto">
+              <source src="{{ publication.video.url }}" type="{{ publication.video.content_type }}">
+              Seu navegador não suporta a exibição de vídeos.
+            </video>
+            {% endif %}
+            {% if publication.attachment %}
+            <a href="{{ publication.attachment.url }}" download>Download anexo</a>
+            {% endif %}
+
+            <p>{{ publication.text }}</p>
+          </article>
+
+          <article class="interactions">
+
+            <button class="like-button{% if publication.user_liked %} liked{% endif %}"
+              data-post-id="{{ publication.id }}" data-user-liked="{{ publication.user_liked }}">
+              <span class="lamp material-icons">
+                {% if publication.user_liked %}lightbulb{% else %}lightbulb_outline{% endif %}
+              </span>
+            </button>
+
+            <span class="likes-count" id="likes-count-{{ publication.id }}">{{ publication.get_likes_count }}
+              Insight(s)</span>
+
+            {% if publication.direct_comments_count > 0 %}
+            <a href="{% url 'storage_app:view_comments' publication.id %}">
+              <span class="comment-count" id="comment-count-{{ publication.id }}">
+                {{ publication.direct_comments_count }} 
+              </span> Comentário(s)</a>
+            {% endif %}
+
+
+            <form method="post" action="{% url 'storage_app:add_comment' publication.id %}" class="comment-form">
+              {% csrf_token %}
+              {{ comment_form.text }}
+
+              <button type="submit" class="add-comment-button" data-publication-id="{{ publication.id }}"
+                aria-placeholder="Enviar">
+                <span title="enviar" id="seta_comentarios" class="material-symbols-outlined">
+                  send
+                </span>
+              </button>
+            </form>
+
+          </article>
+
+
+        </section>
+
+        <!-- Adicione instruções de impressão para depuração -->
+
+
+        {% endif %}
+        {% endfor %}
+        <!-- Fim do código do feed de publicações -->
+      </section>
+
+      <!-- 
+      <aside class="add-publication">
+        <a href="{% url 'storage_app:add_publication' %}" class="new-button">New</a>
+      </aside>
+      -->
+
+    </section>
+
+
+
+    <section class="right_lane">
+
+      <section class="right_container">
+
+        <article class="conjunto_newbtn">
+          <a class="new-button" href="{% url 'storage_app:add_publication' %}" title="Nova Publicação">
+            <article class="txt-new-button">
+              New
+            </article>
+          </a>
+        </article>
+        <article class="ultimas_ativ">
+          <p class="nome_recents">Recentes</p>
+
+          <ul class="recents_list">
+            {% for publication in recent_publications %}
+            <li class="li_recents_list">
+              <a href="{% url 'storage_app:view_publication' publication.id %}">
+                {{ publication.title }}
+              </a>
+            </li>
+            {% empty %}
+            <li>Nenhuma publicação recente encontrada.</li>
+            {% endfor %}
+          </ul>
+
+        </article>
+
+      </section>
+
+    </section>
+
+  </main>
+
+  <script src="{% static 'js/main/transforms.js' %}"></script>
+  <script src="{% static 'js/main/likeresponse.js' %}"></script>
+  <script src="{% static 'js/main/comentariosresponse.js' %}"></script>
+  <script src="{% static 'js/main/infiniteScroll.js' %}"></script>
+
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+    <link rel="stylesheet" href="{% static 'css/main/new_publi.css' %}">
+</head>
+<body>
+
+    <section class="edit_post_tot"> 
+
+      <article class="wrapper_editpub">
+        <h2 class="edit_pubtext">Editar Postagem</h2>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Salvar Alterações</button>
+        </form>
+        <article class="voltar_bibli">
+          <a href="{% url 'storage_app:library' %}">Voltar para a Biblioteca</a>
+        </article>
+      </article>
+    </section>
+
+
+</body>
+</html>
+{% endblock %}

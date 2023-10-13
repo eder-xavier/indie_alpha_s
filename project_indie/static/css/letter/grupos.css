@@ -1,0 +1,256 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&display=swap');
+
+:root {
+
+    --letrasClaras: #dfdfdf;
+    --letrasAzuis: rgb(0, 0, 19);
+
+    --fundoAzul: linear-gradient(to right, rgb(1, 0, 12), rgb(1, 0, 14), rgb(1, 0, 16)); 
+    --fundoBranco: linear-gradient(to right, rgb(245, 245, 245), rgb(235, 235, 235), rgb(225, 225, 225));
+    --fundoIndigo: linear-gradient(to right, #223f55, #213e54, #25445d);
+
+}
+
+.div-contac{
+    display: none;
+}
+
+.conversa_grupos {
+    display: block;
+    position: absolute;
+    bottom: 4.9vh;
+    left: 37.5vw;
+    height: 75.5vh;
+    width: 56.9vw;
+    padding: 15px;
+    margin: 25px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transform: scale(1);
+    transition: transform 0.5s ease, height 0.2s ease;
+}
+
+.profile_pic_grups{
+    border-radius: 50%;
+    width: 43px;
+    height: 43px;
+    margin-right: 10px;
+}
+
+.c {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    padding: 8%;
+    list-style: none;
+    text-decoration: none;
+    font-size: large;
+    border-radius: 6px;
+    color: var(--letrasClaras);
+}
+  
+  .c:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 0.5s;
+}
+
+.grupos_nome_list , .grupos_nome_details{
+    text-align: justify;
+    margin: 10px;
+    font-size: 24px;
+}
+
+.grupos_nome_conversa{
+    text-align: justify;
+    margin-top: 8px;
+    margin-bottom: 20px ;
+    font-size: 24px;
+}
+
+.form_send_group_message{
+    position: relative;
+    bottom: 1vh;
+    width: 100%;
+    height: 40%;
+    background: transparent;
+}
+
+#voltar_group_chat_icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    font-size: 2em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 0;
+}
+
+#message-container_groups{
+    height: 80.5%;
+}
+
+
+.conversa_grupos h3 {
+    font-size: 18px; /* Tamanho do cabeçalho */
+    margin: 0;
+    padding: 5px 0;
+    color: #333; /* Cor do texto */
+  }
+  
+  .conversa_grupos p {
+    font-size: 14px; /* Tamanho do texto */
+    color: #666; /* Cor do texto */
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  #member-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #member-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+  }
+  
+  #member-list li a {
+    color: #007BFF; /* Cor do link (azul) */
+    text-decoration: none;
+    padding-left: 10px;
+    font-size: 14px;
+  }
+  
+  /* Estilize os botões de forma personalizada */
+  #button-container {
+    margin-top: 15px;
+  }
+  
+  .button-container button {
+    background-color: #007BFF; /* Cor de fundo do botão (azul) */
+    color: #fff; /* Cor do texto (branco) */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  /* Estilo para o botão de apagar grupo */
+  .button-container button.delete-group {
+    background-color: #FF4500; /* Cor de fundo do botão (vermelho) */
+  }
+  
+  /* Adicione um estilo para o botão de cancelar */
+  .button-container button.cancel-button {
+    background-color: #ccc; /* Cor de fundo do botão (cinza) */
+  }
+
+
+  
+
+  .members {
+    list-style: none;
+    padding: 0;
+    height: 160px; /* Altura máxima com barra de rolagem vertical */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
+    scrollbar-width: thin;
+    scrollbar-color: #ccc var(--letrasClaras);
+  }
+
+  .members::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .members::-webkit-scrollbar-thumb {
+    background-color: var(--letrasClaras);
+    border-radius: 6px;
+  }
+  
+  .members::-webkit-scrollbar-thumb:hover {
+    opacity: 0.7;
+  }
+  
+  .member {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 10px;
+  }
+
+  li.member{
+    height: 80px;
+  }
+
+  .profile-pic {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .member-username {
+    flex-grow: 1;
+    font-size: 16px;
+  }
+  
+  .options-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .options {
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  
+  .options-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    top: 40px;
+    right: 0;
+    z-index: 1; /* Adicione uma camada para sobrepor outros elementos */
+  }
+  
+  .member:hover .options-menu {
+    display: block;
+  }
+  
+  .options-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .options-menu li {
+    margin: 5px 0;
+  }
+  
+  .margin_members_list{
+    margin: 100px;
+  }
+
+  .margin_members_list_final{
+    margin: 200px;
+  }
+  

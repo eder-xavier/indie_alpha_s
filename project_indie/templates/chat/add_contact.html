@@ -1,0 +1,43 @@
+{% extends 'chat/inbox.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+    <link rel="stylesheet" href="{% static 'css/letter/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'css/letter/grupos.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+
+</head>
+<body>
+  <section id="amizade" class="div-amizade">
+
+    <h1>Adicionar Contato</h1>
+    <form method="post" action="{% url 'letter_app:add_contact' %}">
+      {% csrf_token %}
+      <input type="text" name="username" class="buscausers" placeholder="Nome de usuário" required>
+      <button type="submit" class="btnadd">Adicionar</button>
+    </form>
+
+    <h2>Solicitações de Amizade</h1>
+      <ul>
+        {% for request in friend_requests %}
+        <li class="listasoli">{{ request.requested_by.username }} quer adicionar você como contato.
+          <article class="btnaceitar">
+            <a href="{% url 'letter_app:accept_friend_request' contact_id=request.id %}">Aceitar</a>
+          </article>
+        </li>
+        {% empty %}
+        <li>Nenhuma solicitação de amizade pendente.</li>
+        {% endfor %}
+      </ul>
+
+  </section>
+</body>
+</html>
+{% endblock%}

@@ -1,0 +1,153 @@
+{% extends 'chat/inbox.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indie</title>
+  <link rel="stylesheet" href="{% static 'css/letter/grupos.css' %}">
+  <link rel="stylesheet" href="{% static 'css/letter/messages.css' %}">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+  <section id="lista_grupos" class="section_lista_grupos">
+    <h1 class="grupos_nome_list">Grupos</h1>
+    <ul>
+      {% for group in groups %}
+      <a href="{% url 'letter_app:group_chat' group_id=group.id %}">
+        <li class="c">
+          {% if group.image.url %}
+
+          <span>
+            <img class="profile_pic_grups" src="{{ group.image.url }}" alt="{{ group.name }} Image">
+          </span>
+          <span>
+            {{ group.name }}
+          </span>
+          {% else %}
+          <span class="circle" id="circle_contacts">
+            <img class="profile_pic_grups" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil">
+          </span>
+          {% endif %}
+        </li>
+      </a>
+      {% endfor %}
+    </ul>
+
+  </section>
+
+  <section class="conversa_grupos">
+
+    <p>
+      <a href="{% url 'letter_app:group_chat' group_id=group.id %}"><span title="Voltar para o chat do grupo"
+          class="material-symbols-outlined" id="voltar_group_chat">
+          arrow_back
+        </span>
+      </a>
+
+      <a href="{% url 'letter_app:group_list' %}"><span title="Fechar" class="material-symbols-outlined" id="close">
+          close
+        </span>
+      </a>
+    </p>
+    <h3 class="grupos_nome_details">Detalhes</h3>
+
+    <article class="message-container">
+      {% if not is_admin %}
+      <h2>{{ group.name }}</h2>
+      <p>{{ group.description }}</p>
+      <p><img src="{{ group.image.url }}" alt="{{ group.name }} Image" width="200"></p>
+      {% else %}
+      <a href="{% url 'letter_app:edit_group' group_id=group.id %}">Edit Group</a>
+      {% endif %}
+      <h3>Membros:</h3>
+      <!--
+      <div class="search-container">
+        <input type="text" id="member-search-input" name="member_search" placeholder="Pesquisar membros">
+      </div>
+      -->
+      <ul id="member-list" class="members">
+        {% for member in group.members.all %}
+          <li class="member">
+            {% if member.profile.profile_picture %}
+            <img src="{{ member.profile.profile_picture.url }}" alt="{{ member.username }}" class="profile-pic">
+            {% else %}
+            <img src="{% static 'img/whyman.png' %}" alt="{{ member.username }}" class="profile-pic">
+            {% endif %}
+            <span class="member-username">{{ member.username }}</span>
+            {% if is_admin and not member == request.user %}
+              <div class="options-container">
+                <span class="options">&#10247;</span>
+                <div class="options-menu">
+                  <ul>
+                    <li><a href="{% url 'letter_app:remove_admin' group_id=group.id member_id=member.id %}">Remover como administrador</a></li>
+                    <li><a href="{% url 'letter_app:remove_member' group_id=group.id member_id=member.id %}">Remover do grupo</a></li>
+                    <li><a href="{% url 'letter_app:promote_member' group_id=group.id member_id=member.id %}">Promover a administrador</a></li>
+                    <!-- Adicione um link para enviar solicitação de amizade, se não forem amigos -->
+                  </ul>
+                </div>
+              </div>
+            {% elif not member == request.user %}
+              <!-- Adicione um link para enviar solicitação de amizade, caso não forem amigos -->
+            {% endif %}
+
+          </li>
+        {% endfor %}
+        <span class="margin_members_list_final"></span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      </ul>
+
+      {% if is_admin %}
+      <h3>Adicionar Membros:</h3>
+      <form method="post" action="{% url 'letter_app:add_contacts_to_group' group_id=group.id %}">
+        {% csrf_token %}
+        <div class="search-container">
+          <input type="text" id="contact-search-input" name="contact_search" placeholder="Pesquisar contatos">
+        </div>
+        <ul id="contacts-list">
+          <!-- Lista de contatos do usuário -->
+          {% for contact in user_contacts %}
+          <li>
+            <span>{{ contact.contact.username }}</span>
+            <input type="checkbox" name="selected_contacts" value="{{ contact.id }}">
+          </li>
+          {% endfor %}
+        </ul>
+        <button type="submit">Adicionar Selecionados</button>
+      </form>
+      {% endif %}
+
+      <a href="{% url 'letter_app:leave_group' group_id=group.id %}">Sair do grupo</a>
+
+      {% if is_admin and group.admins.all.count == 1 %}
+      <a href="{% url 'letter_app:delete_group' group_id=group.id %}">Apagar Grupo</a>
+      {% endif %}
+
+
+      <!-- Adicione um formulário para editar as informações do grupo -->
+      <!-- Adicione um botão para gerar um link de convite para o grupo
+      <button id="generate-invite-link">Gerar Link de Convite</button>
+      <p>Link de Convite: <span id="invite-link">Nenhum link gerado ainda</span></p>
+        -->
+    </article>
+
+
+
+  </section>
+  <script src="{% static 'js/letter/groups.js' %}"></script>
+</body>
+
+</html>
+
+{% endblock %}

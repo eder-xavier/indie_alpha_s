@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Comentários</title>
+    <link rel="stylesheet" href="{% static 'css/main/view_comments.css' %}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <main> 
+    
+        <section class="view_comments_main">
+            
+          <section class="left_lane">
+            <ul class="nav-list2">
+      
+              <li class="li_nav">
+                <a id="l" name="notific" href="{% url 'indie_app:main' %}">
+                  <span id="notific" class="material-symbols-outlined">
+                    house
+                    </span>
+                    Home
+                </a>
+              </li>
+      
+              <li class="li_nav">
+                <a id="l" name="social"  href="{% url 'letter_app:inbox' %}"> <span id="social" class='material-symbols-outlined'>
+                  public
+                </span>Social</a>
+              </li>
+      
+              <li class="li_nav">
+                <a id="l" name="profile" href="{% url 'storage_app:userprofile' user_id=request.user.id %}">
+                  <span id="profile" class='material-symbols-outlined'>
+                    account_circle
+                  </span>Profile
+                </a>
+              </li>
+      
+              <li class="li_nav">
+                <a id="l" name="archives"  href="{% url 'storage_app:library' %}"> <span id="archives" class='material-symbols-outlined'>
+                  archive
+                </span>Archives</a>
+              </li>
+      
+              <li class="li_nav">
+                <a id="l" name="settings"  href="#"> <span id="settings" class='material-symbols-outlined'>
+                  settings
+                </span>Settings</a>
+              </li>
+      
+              <li class="li_nav">
+                <a id="l" name="logout"  href="{% url 'indie_app:logout' %}"> <span id="logout" class='material-symbols-outlined'>
+                  logout
+                </span>Log out</a>
+              </li>
+      
+            </ul>
+          </section>
+
+           
+            <section class="publication_comments">
+
+                <!-- Informações do user -->
+                <article class="user-info">
+                
+                  <a href="{% url 'storage_app:userprofile' user_id=publication.author.profile.user.id %}">
+                    {% if publication.author.profile.profile_picture %}
+                      <article>
+                        <img class="perfilf_feed" style="height: 46px; width: 46px;" src="{{ publication.author.profile.profile_picture.url }}" alt="{{ publication.author.username }}'s Profile Picture">
+                      </article>
+                    {% else %}
+                      <article>
+                        <img class="perfilf_feed" style="height: 46px; width: 46px;" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil">
+                      </article>
+                    {% endif %}
+                  </a>
+                
+                  <article class="user-details">
+                    <a href="{% url 'storage_app:userprofile' user_id=publication.author.profile.user.id %}">{{ publication.author.username }}</a>
+                    <span>{{ publication.formatted_created_at }}</span>
+                  </article>
+                
+                </article>
+
+                    <article class="publication-content">
+                        <!-- Conteúdo da publicação -->
+                        <p>{{ publication.title }}</p>
+                            <!-- Exibir imagem, vídeo ou anexo, texto, se estiverem presentes -->
+                            {% if publication.image %}
+                                <img class="publi_image" src="{{ publication.image.url }}" alt="Imagem">
+                            {% endif %}
+                            {% if publication.video %}
+                                <video class="publi_video" controls width="100%" height="auto">
+                                    <source src="{{ publication.video.url }}" type="{{ publication.video.content_type }}">
+                                    Seu navegador não suporta a exibição de vídeos.
+                                </video>
+                            {% endif %}
+                            {% if publication.attachment %}
+                                <a href="{{ publication.attachment.url }}" download>Download anexo</a>
+                            {% endif %}
+                        <p class="text_class">{{ publication.text }}</p>
+                        <aside>
+                            <!-- Campo oculto para o ID da publicação -->
+                            <input type="hidden" id="publication-id" value="{{ publication.id }}">
+                            <!-- Formulário para adicionar comentários -->
+                            <form class="comment-form">
+                                {% csrf_token %}
+                                {{ comment_form.text }}
+                                <button type="submit" id="button_addcomment_only" class="add-comment-button" data-publication-id="{{ publication.id }}">
+                                    <span title="enviar" id="seta_comentarios" class="material-symbols-outlined">
+                                        send
+                                    </span>
+                                </button>
+                            </form>
+                        </aside>
+                    </article>
+
+            </section>
+
+            <section class="view_comments_container">
+                <!-- Exibir os comentários -->
+                <article id="comments-container">
+                    <article class="only_comments">
+                        {% for comment in comments %}
+                        <article class="comment">
+                            <!-- 
+                            {% if request.user == comment.author %}
+                                <button class="delete-comment-button" data-comment-id="{{ comment.id }}">Excluir</button>
+                            {% endif %}
+                            -->
+
+                            
+                            <p>
+                              {% if comment.author.profile.profile_picture %}
+                              <a href="{% url 'storage_app:userprofile' user_id=comment.author.profile.user.id %}">
+                                <img class="perfilf_feed" style="height: 43px; width: 43px;" src="{{ comment.author.profile.profile_picture.url }}" alt="{{ comment.author.username }}'s Profile Picture">
+                              </a>
+                              {% else %}
+                              <a href="{% url 'storage_app:userprofile' user_id=comment.author.profile.user.id %}">
+                                <img class="perfilf_feed" style="height: 43px; width: 43px;" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil Padrão">
+                              </a>
+                              {% endif %}
+                              
+                              <a href="{% url 'storage_app:userprofile' user_id=comment.author.profile.user.id %}">
+                                <span class="nome_author">{{ comment.author.username }}</span>
+                              </a>
+                              <!-- Exibir hora da postagem do comentário 
+                                <span class="hora_comentario">{{ comment.created_at|naturalday }}</span>
+                              -->
+                              <span class="hora_comentario">{{ comment.formatted_created_at }}</span>
+                              
+                            </p>
+
+                            <p class="text_comment">{{ comment.text }}</p>
+                            
+                            
+                            <!-- <p id="reply-count-{{ comment.id }}">{{ comment.replies.count }} Respostas</p> -->
+
+                            <!-- Botão para mostrar/ocultar respostas -->
+                            <button class="show-replies-button" data-comment-id="{{ comment.id }}">Mostrar Respostas ({{ comment.replies.count }})</button>
+                            
+                            <!-- BOTÃO LAMPADA DE LIKE LEMBRAR DE MEXER NO JAVASCRIPT
+
+                            <button class="like-button"  data-comment-id="{{ comment.id }}">
+                              <span class="lamp material-icons">
+                                  {% if publication.user_liked %}lightbulb{% else %}lightbulb_outline{% endif %}
+                              </span>
+                            </button>
+                            <span class="likes-count" data-comment-id="{{ comment.id }}">{{ comment.likes.count }} Insight(s)</span>
+                            -->
+                            
+                            <button class="like-button" data-comment-id="{{ comment.id }}">Like ({{ comment.likes.count }})</button>
+                            
+
+                            <!-- Formulário para adicionar resposta -->
+                            <article class="reply-form">
+                              <form method="post" action="{% url 'storage_app:reply_to_comment' comment.id %}" class="reply-comment-form">
+                                  {% csrf_token %}
+                                  {{ reply_form.text }}
+                                  <input type="hidden" name="parent_comment_id" value="{{ comment.id }}">
+                                  <button type="submit" class="add-comment-button" data-publication-id="{{ publication.id }}" data-comment-id="{{ comment.id }}">
+                                      <span title="enviar" id="seta_respostas" class="material-symbols-outlined">
+                                          send
+                                      </span>
+                                  </button>
+                              </form>
+                          </article>
+
+                            
+                        </article>
+                    
+                        <!-- Contêiner para exibir respostas -->
+                        <article class="replies-container" id="replies-container-{{ comment.id }}">
+                            {% for reply in comment.replies.all %}
+                            <article class="reply">
+                            
+                              <p>
+                                {% if comment.author.profile.profile_picture %}
+                                <a href="{% url 'storage_app:userprofile' user_id=reply.author.profile.user.id %}">
+                                  <img class="perfilf_feed" style="height: 43px; width: 43px;" src="{{ comment.author.profile.profile_picture.url }}" alt="{{ comment.author.username }}'s Profile Picture">
+                                </a>
+                                {% else %}
+                                <a href="{% url 'storage_app:userprofile' user_id=reply.author.profile.user.id %}">
+                                  <img class="perfilf_feed" style="height: 43px; width: 43px;" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil Padrão">
+                                </a>
+                                {% endif %}
+
+                                <a href="{% url 'storage_app:userprofile' user_id=reply.author.profile.user.id %}">
+                                  <span class="nome_author">{{ reply.author.username }}</span>
+                                </a>
+                                <span class="hora_comentario">{{ reply.created_at|naturalday }}</span>
+                              </p>
+
+                                <p class="text_comment">{{ reply.text }}</p>
+                                
+                                <!-- Botão "Like" para a resposta -->
+                                <button class="like-button" data-comment-id="{{ reply.id }}">Like ({{ reply.likes.count }})</button>
+                            </article>
+                            {% endfor %}
+                        </article>
+                        {% endfor %}
+                    </article>
+                </article>
+            </section>
+        </section>
+    </main>
+
+     <!--  
+    <script src="{% static 'js/main/likeresponse.js' %}"></script> 
+    -->
+    <script src="{% static 'js/main/view_comments.js' %}"></script>
+    <script src="{% static 'js/main/comentariosresponse.js' %}"></script>
+</body>
+</html>
+{% endblock %}

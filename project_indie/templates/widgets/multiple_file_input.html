@@ -1,0 +1,4 @@
+{% for file in widget.value %}
+    <p>{{ file.name }}</p>
+{% endfor %}
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>

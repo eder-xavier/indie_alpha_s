@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+</head>
+<body>
+
+    <h2>Friend Requests</h2>
+
+<h3>Received Requests</h3>
+<ul>
+    {% for request in received_requests %}
+    <li>
+        {{ request.from_user.username }}
+        <a href="{% url 'friendship:accept_friend_request' request.id %}">Accept</a>
+        <a href="{% url 'friendship:reject_friend_request' request.id %}">Reject</a>
+    </li>
+    {% empty %}
+    <li>No received friend requests.</li>
+    {% endfor %}
+</ul>
+
+<h3>Sent Requests</h3>
+<ul>
+    {% for request in sent_requests %}
+    <li>
+        Friend request sent to {{ request.to_user.username }}
+    </li>
+    {% empty %}
+    <li>No sent friend requests.</li>
+    {% endfor %}
+</ul>
+    
+</ul>
+</body>
+</html>

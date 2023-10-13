@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Foto de Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/main/profile.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Editar Foto de Perfil</h1>
+    
+    <!-- Adicione elementos para o Cropper.js -->
+    <form id="edit-profile-picture-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Adicione apenas o campo da imagem e seus botões de edição aqui -->
+        {{ form.profile_picture.label_tag }}
+        {{ form.profile_picture }}
+        
+        <button id="save-profile-picture">Salvar</button>
+        <button id="discard-profile-picture">Descartar</button>
+    </form>
+    
+    <div>
+        <h2>Pré-visualização da Imagem</h2>
+        <div id="image-preview"></div>
+    </div>
+    
+    <script src="{% static 'js/main/corteimagem.js' %}"></script>
+</body>
+</html>
+{% endblock %}

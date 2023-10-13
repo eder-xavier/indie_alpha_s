@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+    <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/main/estruturamain.css'' %}">
+    
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+</head>
+<body>
+  <header>
+      <nav>
+
+        <!-- 
+        <button id="new">New</button>
+        
+        <a class="logo" href="{% url 'main' %}"><img id="logo" src="{% static 'img/main/logo-indie3.png' %}" alt="logo"></a>
+        -->
+        <a class="logo" href="{% url 'letter_app:profile' %}"><img id="logo" src="{% static 'img/main/logo-indie3.png' %}" alt="logo"></a>
+
+
+        
+
+        <div class="mobile-menu">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+
+        <ul class="nav-list">
+
+          <li>
+          <a id="l" name="notific"  href="#"> <span id="notific" class='material-symbols-outlined'>
+            notifications
+          </span> Notifications </a>
+          </li>
+
+          <li>
+            <a id="l" name="social"  href="{% url 'letter_app:inbox' %}"> <span id="social" class='material-symbols-outlined'>
+              public
+            </span>Social</a>
+          </li>
+
+          <li>
+            <a id="l" name="profile"  href="#"> <span id="profile"  class='material-symbols-outlined'>
+              account_circle
+            </span>Profile </a>
+        </li>
+
+          <li>
+            <a id="l" name="archives"  href="#"> <span id="archives" class='material-symbols-outlined'>
+              archive
+            </span>Archives</a>
+          </li>
+
+          <li>
+            <a id="l" name="settings"  href="#"> <span id="settings" class='material-symbols-outlined'>
+              settings
+            </span>Settings</a>
+          </li>
+
+          <li>
+            <a id="l" name="logout"  href="{% url 'indie_app:logout' %}"> <span id="logout" class='material-symbols-outlined'>
+              logout
+            </span>Log out</a>
+        </li>
+
+        </ul>
+
+      </nav>
+  </header>
+  <main>
+
+    <!-- FEED PROVISORIO AQUI
+
+    <div class="container"></div>
+    <script src="../principal/feed.js"></script>
+    <link rel="stylesheet" href="../../estilos/principal/feed.css">
+    -->
+
+  </main>
+
+    <script src="{% static 'js/main/transforms.js' %}"></script>
+
+
+
+    <!--
+
+    <a href="principal.php"><img src="../../imagens/indie-logo2.png" alt="logo indie" id="logo"></a>
+    -->
+
+</body>
+
+
+
+
+</html>

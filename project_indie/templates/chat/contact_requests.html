@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/letter/messages.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+
+</head>
+<body>
+  <h1>Contact Requests</h1>
+  {% for request in contact_requests %}
+    <p>{{ request.user.username }} wants to add you as a contact.</p>
+    <form method="post" action="{% url 'letter_app:add_contact' %}">
+      {% csrf_token %}
+      <input type="hidden" name="username" value="{{ request.user.username }}">
+      <input type="submit" value="Accept">
+    </form>
+  {% empty %}
+    <p>No contact requests</p>
+  {% endfor %}
+</body>
+</html>

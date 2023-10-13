@@ -1,0 +1,82 @@
+
+
+button[type="submit"] {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    color: var(--letrasClaras);
+    border-radius: 5px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: block;
+    margin-top: 13px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efeito de transição suave na cor de fundo do botão */
+}
+
+button[type="submit"]:hover {
+    opacity: 0.7; /* Cor de fundo ao passar o mouse sobre o botão */
+}
+
+.group_name_class{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    color: var(--letrasClaras);
+    border-radius: 5px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align: bottom;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    height: 19px;
+    width: 379px;
+    transition: transform 0.3s ease-in;
+}
+
+.group_description_class{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    color: var(--letrasClaras);
+    border-radius: 5px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align: bottom;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    height: 139px;
+    width: 379px;
+    transition: transform 0.3s ease-in;
+}
+
+.group_image_class{
+    margin-top: 9px;
+    margin-bottom: 16px;
+}
+
+.group_image_class::file-selector-button{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 5px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align: bottom;
+    padding-top: 3px;
+    height: 26px;
+    width: 96px;
+    color: var(--letrasClaras);
+    transition: transform 0.3s ease-in;
+}
+
+.group_image_class::file-selector-button:hover{
+    opacity: 0.7;
+}

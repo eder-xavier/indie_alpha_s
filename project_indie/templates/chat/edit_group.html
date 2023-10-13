@@ -1,0 +1,55 @@
+{% extends 'chat/inbox.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+
+    <link rel="stylesheet" href="{% static 'css/letter/grupos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/letter/messages.css' %}">
+</head>
+<body>
+
+    <section id="lista_grupos" class="section_lista_grupos">
+        <h1 class="grupos_nome_list">Grupos</h1>
+        <ul>
+          {% for group in groups %}
+          <a href="{% url 'letter_app:group_chat' group_id=group.id %}">
+            <li class="c">
+              {% if group.image.url %}
+    
+              <span>
+                <img class="profile_pic_grups" src="{{ group.image.url }}" alt="{{ group.name }} Image">
+              </span>
+              <span>
+                {{ group.name }}
+              </span>
+              {% else %}
+              <span class="circle" id="circle_contacts">
+                <img class="profile_pic_grups" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil">
+              </span>
+              {% endif %}
+            </li>
+          </a>
+          {% endfor %}
+        </ul>
+    
+    </section>
+
+
+    <section class="conversa_grupos">
+        <h1>Edit Group</h1>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Save Changes</button>
+        </form>
+        <a href="{% url 'letter_app:group_detail' group_id=group.id %}">Back to Group Details</a>
+    </section>
+</body>
+</html>
+{% endblock %}

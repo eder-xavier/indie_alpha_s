@@ -1,0 +1,82 @@
+{% extends 'chat/inbox.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+    <link rel="stylesheet" href="{% static 'css/letter/grupos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/letter/messages.css' %}">
+</head>
+
+<body>
+
+    <section id="lista_grupos" class="section_lista_grupos">
+        <h1 class="grupos_nome_list">Grupos</h1>
+        <ul>
+            {% for group in groups %}
+            <a href="{% url 'letter_app:group_chat' group_id=group.id %}">
+                <li class="c">
+                    {% if group.image.url %}
+
+                    <span>
+                        <img class="profile_pic_grups" src="{{ group.image.url }}"alt="{{ group.name }} Image">
+                    </span>
+                    <span>
+                        {{ group.name }}
+                    </span>
+                    {% else %}
+                    <span class="circle" id="circle_contacts">
+                        <img class="profile_pic_grups" src="{% static 'img/whyman.png' %}" alt="Foto de Perfil">
+                    </span>
+                    {% endif %}
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+        <!-- 
+        <a href="{% url 'letter_app:create_group' %}">Criar Grupo</a>
+        -->
+    </section>
+
+
+    <section class="conversa_grupos">
+
+        <a href="{% url 'letter_app:group_detail' group.id %}">
+            <h1 class="grupos_nome_conversa">Chat do Grupo: {{ group.name }}</h1>
+        </a>
+
+        <a href="{% url 'letter_app:inbox' %}"><span class="material-symbols-outlined" id="close">
+                close
+            </span>
+        </a>
+
+
+        <article id="message-container_groups" class="message-container">
+            {% for message in messages %}
+            <article class="message {% if message.sender == request.user %}sent{% else %}received{% endif %}">
+                <p><strong>{{ message.sender.username }}:</strong> {{ message.content }} </p>
+                <span class="timestamp">{{ message.timestamp }}</span>
+            </article>
+            {% endfor %}
+        </article>
+
+        <!-- Formulário para enviar novas mensagens dos grupos -->
+        <form method="post" class="form_send_group_message" action="{% url 'letter_app:send_group_message' group_id=group.id %}">
+            {% csrf_token %}
+            <input type="text" id="envmsg" name="content" placeholder="Digite sua mensagem" required>
+            <button type="submit" id="btnsend">
+                <span id="iconsend" class="material-symbols-outlined">
+                    send
+                </span>
+            </button>
+        </form>
+    </section>
+</body>
+
+</html>
+{% endblock %}

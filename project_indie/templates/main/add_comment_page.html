@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Adicionar Comentário</h2>
+    <p>Comentário na publicação de {{ publication.author.username }}:</p>
+  
+    <form method="post" action="{% url 'storage_app:add_comment' publication.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Enviar Comentário</button>
+    </form>
+  
+    <p><a href="{% url 'indie_app:main' %}">Voltar</a></p>
+</body>
+</html>
+{% endblock %}

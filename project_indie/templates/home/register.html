@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+
+    <link rel="stylesheet" href="{% static 'css/home/registerstyle.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    
+</head>
+<body>
+    
+    <header>
+        <h2 class="logo">Indie</h2>
+        <nav class="navigation">
+            <a class="iniciais" href="{% url 'indie_app:home' %}">Home</a>
+            <a class="iniciais" href="{% url 'indie_app:about' %}">About</a>
+            <a class="iniciais" href="{% url 'indie_app:services' %}">Services</a>
+            <a class="iniciais" href="{% url 'indie_app:contact' %}">Contact</a>
+            <a  href="{% url 'indie_app:login' %}"><button class="btnLogin-popup">Login</button></a>
+        </nav>
+    </header>
+
+    <main> 
+        <section class="wrapper">
+
+            <a href="{% url 'indie_app:home' %}">
+                <span class="material-symbols-outlined" id="close">
+                    close
+                    </span>
+                
+            </a>
+            
+
+            <!--Registration-->
+
+            <section class="form-box register">
+
+                <h2>Registration</h2>
+
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+                <form action="{% url 'indie_app:signup' %}" method="post">
+                    {% csrf_token %}
+                
+                    <article class="input-box">
+                
+                        <span class="material-symbols-outlined">
+                            face
+                        </span>
+                
+                        <input type="text" required name="name" id="name">
+                        <label>Name</label>
+                
+                    </article>
+                
+                    <article class="input-box">
+                
+                        <span class="material-symbols-outlined">
+                            person
+                        </span>
+                        <input type="text" required name="username" id="username">
+                        <label>Username</label>
+                
+                    </article>
+                
+                    <article class="input-box">
+                
+                        <span class="material-symbols-outlined">
+                            lock
+                        </span>
+                        <input type="password" required name="password1" id="password1">
+                        <label>Password</label>
+     
+                
+                    </article>
+                
+                    <article class="input-box">
+                
+                        <span class="material-symbols-outlined">
+                            lock
+                        </span>
+                        <input type="password" required name="password2" id="password2">
+                        <label>Confirm Password</label>
+                        
+                
+                    </article>
+                
+                    <article class="remember-forgot">
+                
+                        <label> <input type="checkbox" name="remember" id="remember" required>
+                        I agree to the <a href="#">terms & conditions</a></label>
+                
+                    </article>
+                
+                    <button type="submit" class="btn">Register</button>
+                    
+
+                    <article class="login-register">
+                        <p>You have an account?
+                        <a href="{% url 'indie_app:login' %}" class="login-link">Login</a>
+                        </p>
+                
+                    </article>
+                
+                </form>
+                
+                
+                <!-- EM CASO DE ERROS 
+                
+                    <article class="input-box">
+                        <label for="{{ form.name.id_for_label }}">Name</label>
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                            <div class="error-message">{{ form.name.errors }}</div>
+                        {% endif %}
+                    </article>
+                
+                -->
+            </section>
+
+        </section>
+    
+    </main>
+
+    <script src="{% static 'js/home/anima.js' %}"></script>
+    <script src="{% static 'js/home/mensagensStatus.js' %}"></script>
+</body>
+</html>

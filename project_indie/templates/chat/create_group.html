@@ -1,0 +1,39 @@
+{% extends 'chat/inbox.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indie</title>
+  <link rel="stylesheet" href="{% static 'css/letter/grupos.css' %}">
+  <link rel="stylesheet" href="{% static 'css/letter/create_group.css' %}">
+</head>
+<body>
+  
+  <section id="criar_grupos" class="section_criar_grupos">
+    <h1>Criar Grupo</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <p>{{ form.name }}</p>
+      <p>{{ form.description }}</p> 
+      <p>Foto de capa do grupo: {{ form.image }}</p>
+      <button type="submit">Criar</button>
+    </form>
+
+    <!--
+    <a href="{% url 'letter_app:group_list' %}">Voltar para a Lista de Grupos</a>
+     -->
+  </section>
+
+
+  
+  <script src="{% static 'js/main/transforms.js' %}"></script>
+  <script src="{% static 'js/letter/trocas.js' %}"></script>
+</body>
+</html>
+
+
+{% endblock %}

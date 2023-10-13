@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie</title>
+    <link rel="shortcut icon" href="{% static 'img/main/logo-indie3.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/home/loginstyle.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    
+</head>
+<body>
+    
+    <header>
+        <h2 class="logo">Indie</h2>
+        <nav class="navigation">
+            <a  class="iniciais" href="{% url 'indie_app:home' %}">Home</a>
+            <a  class="iniciais" href="{% url 'indie_app:about' %}">About</a>
+            <a  class="iniciais" href="{% url 'indie_app:services' %}">Services</a>
+            <a  class="iniciais" href="{% url 'indie_app:contact' %}">Contact</a>
+            <a  href="{% url 'indie_app:login' %}"><button class="btnLogin-popup">Login</button></a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="wrapper">
+
+            <p>Nosssos serviços</p>
+        </div>
+    </main>
+
+    <script src="{% static 'js/home/anima.js' %}"></script>
+
+</body>
+</html>
